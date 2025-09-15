@@ -3,11 +3,23 @@ import {
   createNodeRequestHandler,
   isMainModule,
   writeResponseToNodeResponse,
+  CommonEngine
 } from '@angular/ssr/node';
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getContext } from '@netlify/angular-runtime/context.mjs'
+import { render } from "@netlify/angular-runtime/common-engine";
+import { createRequestHandler } from '@angular/ssr';
+
+    const commonEngine = new CommonEngine();
+
+    export async function netlifyCommonEngineHandler(
+      request: Request,
+      context: any
+    ): Promise<Response> {
+      return await render(commonEngine);
+    }
 
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
@@ -67,5 +79,6 @@ if (isMainModule(import.meta.url)) {
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
 export const reqHandler = createNodeRequestHandler(app);
+
 
 
