@@ -1,3 +1,8 @@
 [build]
   command = "npm run build"
   publish = "dist/pokemon-ssr/browser"
+
+[[redirects]]
+  from = "/*"
+  status = 200
+  to = "/index.csr.html"
