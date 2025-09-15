@@ -8,9 +8,8 @@ import {
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getContext } from '@netlify/angular-runtime/context.mjs'
 import { render } from "@netlify/angular-runtime/common-engine";
-import { createRequestHandler } from '@angular/ssr';
+
 
     const commonEngine = new CommonEngine();
 
@@ -27,7 +26,7 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
-const context = getContext()
+
 
 /**
  * Example Express Rest API endpoints can be defined here.
@@ -57,7 +56,7 @@ app.use(
  */
 app.use('/**', (req, res, next) => {
   angularApp
-    .handle(req, context)
+    .handle(req)
     .then((response) =>
       response ? writeResponseToNodeResponse(response, res) : next(),
     )
