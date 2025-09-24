@@ -1,0 +1,13 @@
+<div
+[routerLink]="['/pokemInfo', pokemon().id]"
+
+class=" w-35 h-40 animate-fadeIn bg-gray-300/25  p-3 rounded-sm overflow-hidden text-center cursor-pointer "
+>
+       <img
+       class="w-24 h-24 m-auto"
+       height="96px"
+       width="96px"
+       [src]="pokemonImg()"
+       [alt]="pokemon().name">
+       <p>{{pokemon().name}}</p>
+    </div>

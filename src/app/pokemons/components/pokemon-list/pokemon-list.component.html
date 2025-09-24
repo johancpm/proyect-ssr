@@ -1,0 +1,8 @@
+
+<div class=" grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 ">
+
+  @for (poke of pokemonsList(); track poke.id) {
+    <app-pokemon-card  [pokemon]="poke" />
+  }
+
+</div>
