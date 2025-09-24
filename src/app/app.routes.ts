@@ -1,4 +1,8 @@
+
 import { Routes } from '@angular/router';
+
+
+
 
 export const routes: Routes = [
 
@@ -19,8 +23,9 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/pokemons-page/pokemons-page.component')
   },
   {
-    path: 'pokemInfo/:id',
+    path: 'pokeminfo/:id',
     loadComponent: () => import('./pages/pokemon-page/pokemon-page.component')
+
   },
   {
     path: '**',

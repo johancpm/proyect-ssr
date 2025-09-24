@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { PokemonsDataView, PokemonData } from '../interfaces/index';
 import { map, Observable, tap } from 'rxjs';
 import { PokemonDataID } from '../interfaces/pokemon-id.data';
@@ -11,6 +11,7 @@ import { PokemonDataID } from '../interfaces/pokemon-id.data';
 export class PokemonsService {
 
 private http = inject(HttpClient);
+public idPoke = signal<Array<string>>([])
 
 getPokemons (page: number): Observable<PokemonData[]> {
    if(page != 0){
@@ -34,7 +35,7 @@ getPokemons (page: number): Observable<PokemonData[]> {
 }
 
 pokemongetById(id: string): Observable<PokemonDataID> {
-
+  this.idPoke.update(currentId => [...currentId, id])
   return this.http.get<PokemonDataID>(`https://pokeapi.co/api/v2/pokemon/${id}`)
 }
 
