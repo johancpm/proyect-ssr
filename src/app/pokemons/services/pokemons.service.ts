@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { PokemonsDataView, PokemonData } from '../interfaces/index';
-import { map, Observable, observeOn, of, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { PokemonDataID } from '../interfaces/pokemon-id.data';
-import { resolve } from 'node:path';
+
 
 
 @Injectable({
@@ -31,22 +31,27 @@ getPokemons (page: number): Observable<PokemonData[]> {
         }))
         return simplePokemons;
     }),
+    tap( poke => {
+      poke.map( ids => {
+         this.idPoke.update(currentId => [...currentId, ids.id])
+      })
+    }),
     tap( resp => console.log(resp)),
   )
 }
 
 pokemongetById(id: string): Observable<PokemonDataID> {
-  this.idPoke.update(currentId => [...currentId, id])
+  /* this.idPoke.update(currentId => [...currentId, id]) */
   return this.http.get<PokemonDataID>(`https://pokeapi.co/api/v2/pokemon/${id}`)
 }
 
-routerId (): string[] {
-   for (let i = 1; i < 21; i++) {
+/* routerId (): string[] {
+   for (let i = 1; i < 1026; i++) {
     const id = i.toString()
   this.idPoke.update(currentId => [...currentId, id])
    }
 
    return this.idPoke()
-}
+} */
 
 }
