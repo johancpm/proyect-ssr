@@ -11,8 +11,8 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
        const serviceId = inject(PokemonsService)
-       const id = serviceId.idPoke();
-       return id.map(id => ({id}));
+       const ids =  serviceId.idPoke();
+       return ids.map(id => ({id}));
     }
   },
   {
