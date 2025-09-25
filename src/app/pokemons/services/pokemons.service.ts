@@ -33,7 +33,7 @@ getPokemons (page: number): Observable<PokemonData[]> {
     }),
     tap( poke => {
       poke.map( ids => {
-         this.idPoke.update(currentId => [...currentId, ids.id])
+         this.routerId(ids.id)
       })
     }),
     tap( resp => console.log(resp)),
@@ -45,13 +45,8 @@ pokemongetById(id: string): Observable<PokemonDataID> {
   return this.http.get<PokemonDataID>(`https://pokeapi.co/api/v2/pokemon/${id}`)
 }
 
-/* routerId (): string[] {
-   for (let i = 1; i < 1026; i++) {
-    const id = i.toString()
+routerId (id: string) {
   this.idPoke.update(currentId => [...currentId, id])
-   }
-
-   return this.idPoke()
-} */
+}
 
 }
