@@ -31,11 +31,6 @@ getPokemons (page: number): Observable<PokemonData[]> {
         }))
         return simplePokemons;
     }),
-    tap( poke => {
-      poke.map( ids => {
-         this.routerId(ids.id)
-      })
-    }),
     tap( resp => console.log(resp)),
   )
 }
@@ -45,8 +40,12 @@ pokemongetById(id: string): Observable<PokemonDataID> {
   return this.http.get<PokemonDataID>(`https://pokeapi.co/api/v2/pokemon/${id}`)
 }
 
-routerId (id: string) {
+routerId (): string[] {
+   for (let i = 1; i < 1026; i++) {
+    const id = i.toString()
   this.idPoke.update(currentId => [...currentId, id])
+   }
+  return this.idPoke()
 }
 
 }
