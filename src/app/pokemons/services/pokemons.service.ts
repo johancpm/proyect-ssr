@@ -40,5 +40,13 @@ pokemongetById(id: string): Observable<PokemonDataID> {
   return this.http.get<PokemonDataID>(`https://pokeapi.co/api/v2/pokemon/${id}`)
 }
 
+routerId (): string[] {
+   for (let i = 1; i < 21; i++) {
+    const id = i.toString()
+  this.idPoke.update(currentId => [...currentId, id])
+   }
+
+   return this.idPoke()
+}
 
 }
